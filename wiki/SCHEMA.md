@@ -45,7 +45,7 @@ the picture changes — this is the section that compounds.
 
 1. Read `wiki/index.md` first to know what already exists. Never create a
    duplicate page for an alias — extend the existing page and add the alias.
-2. For each cluster and significant quick hit in today's briefing:
+2. For each cluster and radar item in today's briefing:
    - Update existing topic pages: append Timeline entries, rewrite Current
      state if it changed, file contradictions explicitly.
    - Create a new topic page only for things likely to recur (tools, models,
@@ -56,6 +56,10 @@ the picture changes — this is the section that compounds.
 5. Slugs: kebab-case (`agent-os.md`, `mcp.md`, `fable-5.md`). Cross-link with
    `[[slug]]` wherever topics relate.
 6. Be honest in Timeline entries: distinguish "X demoed Y" from "X claimed Y".
+7. Radar items get a Timeline entry on their topic page marked `(radar)`. When
+   a radar-tracked topic recurs and gets promoted to a story cluster, note the
+   promotion in its Timeline ("promoted from radar, first spotted YYYY-MM-DD")
+   — this powers "first spotted on your radar" callouts in reports.
 
 ## Connections rules (the report section)
 

@@ -43,6 +43,11 @@ def validate(b: dict):
         for s in c["sources"]:
             if "video_id" not in s or "channel" not in s:
                 sys.exit(f"cluster[{i}] source missing video_id/channel: {s}")
+    for j, r in enumerate(b.get("radar", [])):
+        if "text" not in r or "video_id" not in r:
+            sys.exit(f"radar[{j}] missing text/video_id")
+        if r.get("tag") not in ("tool", "signal", "verify", "contrarian"):
+            sys.exit(f"radar[{j}] tag must be tool/signal/verify/contrarian")
     for j, conn in enumerate(b.get("connections", [])):
         if conn.get("kind") not in ("builds_on", "contradicts", "reinforces", "new_thread"):
             sys.exit(f"connections[{j}] kind must be builds_on/contradicts/reinforces/new_thread")

@@ -54,8 +54,14 @@ This is the core value. Work **across** sources, not per-video:
   ("You're building client automations — this replaces the n8n pattern you use").
 - Demand evidence: prefer creators who *demo* over creators who *react*.
   If everyone is just reacting to the same announcement, say so — that IS the signal.
-- Leftover minor-but-interesting items → `quick_hits` (max 6). Drop pure filler;
-  the 3% that matters is the product. It is fine to drop most videos.
+- Leftover items go on the **radar** (max 5) ONLY if they earn one of four tags:
+  `tool` (worth trying), `signal` (early sign of something bigger), `verify`
+  (notable claim without evidence yet), `contrarian` (credible against-consensus
+  take). No tag fits → drop it. The radar is an early-warning system, not a
+  leftovers drawer; the 3% that matters is the product, and dropping most
+  videos is correct. If a radar item from a PREVIOUS run recurs today, promote
+  it to a story cluster and say so in its summary ("first spotted on your radar
+  <date>").
 - **The Brief** is two bullet lists, written for readers with very little
   attention span — every bullet earns its place:
   - `whats_new`: 3-5 bullets, each ONE crisp sentence naming a concrete
@@ -107,8 +113,9 @@ schema's lint pass.
       ]
     }
   ],
-  "quick_hits": [
-    {"text": "One-line item", "video_id": "abc123", "channel": "Jeff Su"}
+  "radar": [
+    {"tag": "tool|signal|verify|contrarian",
+     "text": "One-line item", "video_id": "abc123", "channel": "Jeff Su"}
   ],
   "connections": [
     {"kind": "builds_on|contradicts|reinforces|new_thread",
