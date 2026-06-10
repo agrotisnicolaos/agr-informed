@@ -14,3 +14,9 @@
 
 # active-pack record is local to each clone, not shared
 manifests/active-packs.json
+
+# agr-informed — private local data
+data/
+reports/
+state/
+profile.md

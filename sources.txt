@@ -1,0 +1,16 @@
+# agr-informed sources — one YouTube channel URL per line.
+# Any form works: @handle, /channel/ID, with or without /videos.
+# Lines starting with # are ignored. Edit by hand or ask Claude: "/sources add <url>"
+
+https://www.youtube.com/@BenAI92
+https://www.youtube.com/@theMITmonk
+https://www.youtube.com/@JeffSu
+https://www.youtube.com/@danmartell
+https://www.youtube.com/channel/UCswG6FSbgZjbWtdf_hMLaow
+https://www.youtube.com/@EricWTech
+https://www.youtube.com/@nateherk
+https://www.youtube.com/@ai-agents-podcast
+https://www.youtube.com/@LiamOttley
+https://www.youtube.com/channel/UC_RovKmk0OCbuZjA8f08opw
+https://www.youtube.com/@TechWithTim
+https://www.youtube.com/@MeticsMedia

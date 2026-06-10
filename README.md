@@ -1,82 +1,70 @@
-# agr-launchpad
+# agr-informed
 
-**A batteries-included starting point for building anything with [Claude Code](https://claude.com/claude-code).**
+**Let AI keep up with AI.** Your favorite YouTube creators publish ~30 hours of AI
+content a week. agr-informed turns it into a beautiful 3-minute morning briefing —
+clustered across sources, filtered for what's novel, contrarian, and relevant to *you*.
 
-Clone it, open it, approve a few prompts — and you have a solid, versatile setup: the most useful
-general-purpose skills, plugins, MCP servers, and agents, ready to go. It's the *starting place*.
-When you start a specific kind of project (ML, an iOS app, a journal…), you add a **pack** on top.
+No API keys. No servers. No cost beyond the paid Claude account you already have:
+**Claude Code is the brain.** Transcripts are fetched with free public tools, and your
+Claude subscription does the analysis.
 
-> New here? Open **[`docs/onboarding.html`](docs/onboarding.html)** in your browser — it's a friendly,
-> step-by-step guide written for non-developers.
+Inspired by Dave Killeen's intake system (as shared by Aakash Gupta): he follows
+60 channels and 120 newsletters and reads none of them — his system does.
 
 ## Quickstart
 
-1. **Install prerequisites:** [Claude Code](https://claude.com/claude-code) and [Node.js](https://nodejs.org) (LTS).
-2. **Clone & open:**
+1. Install [Claude Code](https://claude.com/claude-code) (any paid Claude plan).
+2. Clone and open:
    ```bash
-   git clone <your-fork-url> agr-launchpad
-   cd agr-launchpad
+   git clone https://github.com/agrotisnicolaos/agr-informed.git
+   cd agr-informed && claude
    ```
-   Open the folder in Claude Code (or VS Code with the Claude Code extension).
-3. **Install the plugins.** Trust the folder and **approve** the install prompts, *or* run one command:
-   ```bash
-   make install-plugins
-   ```
-   (Plugins live in your global Claude setup, so they can't ship pre-installed in a repo — this repo
-   just pre-configures them. Confirm with `/plugin` or `claude plugin list`.)
-4. **Approve the MCP servers** when asked (context7, github, jupyter). Check with `claude mcp list`.
-5. **Add secrets (optional):** `cp .env.example .env`, then paste a GitHub token if you want the
-   GitHub MCP. Run `make setup` for a guided walkthrough.
-6. **Restart Claude Code.** You're ready — just start describing what you want to build.
+3. Run `/agr-setup` — checks dependencies (installs `yt-dlp`), interviews you to build
+   your profile, and confirms your channel list.
+4. Run `/briefing` — your first report opens in the browser.
 
-## What you get out of the box
+## The commands
 
-**Plugins** (auto-offered on folder-trust, or `make install-plugins`):
-- **superpowers** — disciplined workflows: brainstorming, planning, TDD, debugging, verification.
-- **skill-creator** — build your own skills.
-- **frontend-design** — distinctive, production-grade UI (by Anthropic).
-- **code-review** — `/code-review` for diff review, plus `/code-review ultra` cloud multi-agent review.
-- **context-mode** — keeps big tool output out of the context window.
-- **claude-mem** — persistent memory across sessions.
+| Command | What it does |
+|---|---|
+| `/briefing` | Fetch everything new since last run → cluster → render today's report |
+| `/agr-setup` | First-run setup: dependencies + profile interview |
+| `/sources` | Add/remove/list YouTube channels (any URL form, or just "add Matt Wolfe") |
+| `/agr-schedule` | Automate it: every morning via launchd, Claude cloud routine, or manual |
+| `/teach <concept>` | Saw something unfamiliar? Get it explained simply, at your level |
 
-**MCP servers** (`.mcp.json`): **context7** (live docs), **github** (your repos/issues/PRs),
-**jupyter** (live notebooks — `make jupyter`).
-
-**Bundled skills** (zero-install, in `.claude/skills/`): `grill-me`, `coding-standards`,
-`error-handling`, `html`, `dashboard-builder`, `code-tour`, `skill-stocktake`.
-
-**Bundled agents:** `architect`, `code-architect`, `code-explorer`.
-
-**Installed separately** (see onboarding): **gsd** planning toolkit, **markitdown** VS Code extension.
-
-## Packs
-
-The base stays lean. Add project-specific capability with packs:
-
-```bash
-make list-packs              # see what's available
-make new-pack name=ml        # scaffold a new pack from the template
-make use-pack name=ml        # install a pack into the active config
-make unuse-pack name=ml      # remove it
-```
-
-A pack bundles skills, agents, MCP servers, plugins, or a rulebook fragment. Local packs live in
-`packs/` (only `_template` ships populated). Published packs install from the **agr·hub** marketplace
-— already pre-registered here — with one command:
+## How it works
 
 ```
-/plugin install <pack>@agr-hub
+sources.txt ──▶ discover.py ──▶ transcripts.py ──▶ Claude Code ──▶ render.py ──▶ reports/YYYY-MM-DD.html
+(your channels)  (RSS, no keys)  (yt-dlp subs)     (clusters,      (magazine
+                                                    novelty,        template)
+                                                    your profile)
 ```
 
-Browse available packs and projects at **[agrotisnicolaos.github.io/agr-hub](https://agrotisnicolaos.github.io/agr-hub/)**.
-See [`packs/README.md`](packs/README.md) for building your own.
+- **Deterministic scripts** (`pipeline/`) fetch new videos via YouTube RSS (with a
+  yt-dlp fallback for channels whose feeds are broken) and download transcripts.
+- **Claude does the thinking**: clusters stories *across* sources, badges them
+  (NOVEL / CONTRARIAN / TOOLS / NEWS / LEARNING), writes a 2-paragraph TL;DR, and
+  scores relevance against your `profile.md`.
+- **The report** is a single self-contained HTML file: thumbnail-forward magazine
+  layout, timestamp deep-links into each video, ★ bookmarks (saved in your browser),
+  and a saved-stories filter. Share it by sending the file — it works anywhere.
 
-## Conventions
+## Privacy
 
-`CLAUDE.md` holds four behavioral principles (Think Before Coding · Simplicity First · Surgical
-Changes · Goal-Driven Execution) that apply to every project. Packs append to it; the principles
-stay put.
+Everything stays on your machine. `data/`, `reports/`, `state/`, and `profile.md`
+are gitignored. Sharing is opt-in: you send the HTML file, or you choose the
+cloud-routine scheduler knowing reports get committed to your repo.
 
-## Attribution
+## Make it yours
 
-See [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md). Licenses belong to their respective upstream authors.
+- Edit `sources.txt` — one YouTube URL per line. That's the whole config.
+- Edit `profile.md` — the relevance filter. Better profile, sharper briefings.
+- Fork it. Anyone with a paid Claude account can run their own in 5 minutes.
+
+---
+
+Built with [Claude Code](https://claude.com/claude-code) on top of
+[agr-launchpad](https://github.com/agrotisnicolaos/agr-launchpad).
+See `ATTRIBUTIONS.md` for bundled-skill credits.

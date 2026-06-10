@@ -1,5 +1,25 @@
 # CLAUDE.md
 
+## Project: agr-informed
+
+An automated AI-news briefing: YouTube transcripts → cross-source clustering →
+a self-contained magazine-style HTML report. Claude Code is the analysis engine
+(no API keys); deterministic fetching lives in `pipeline/`.
+
+- `sources.txt` — the user's channels (one URL per line)
+- `profile.md` — the user's relevance filter (gitignored, personal)
+- `pipeline/discover.py` → `data/queue.json`; `pipeline/transcripts.py` →
+  `data/transcripts/*.md`; `pipeline/render.py` renders `data/briefing.json`
+  via `templates/report.html` into `reports/`
+- Skills: `/briefing` (the daily run), `/agr-setup`, `/agr-sources`,
+  `/agr-schedule`, `/teach` — see `.claude/skills/`
+- `data/`, `reports/`, `state/`, `profile.md` are private and gitignored
+
+When the user asks "what's new" or anything briefing-shaped, prefer the
+`briefing` skill over ad-hoc work.
+
+---
+
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
