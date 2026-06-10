@@ -1,0 +1,131 @@
+{
+  "date": "2026-06-09",
+  "title": "Agent operating systems are becoming the new app",
+  "stats": {"videos": 30, "channels": 12, "hours_covered": 7.5},
+  "brief": {
+    "whats_new": [
+      {"text": "Three creators independently converged on the same blueprint: wrap Claude in a personal 'agent OS' — skills + connectors + persistent memory.", "refs": ["agent-operating-systems"]},
+      {"text": "Claude's managed agents add credential vaults, session isolation, and a nightly memory 'dream' — the missing pieces for selling agents to clients.", "refs": ["agent-operating-systems"]},
+      {"text": "Hermes, an always-on agent living on a $10 VPS, got setup tutorials from three different channels in one week.", "refs": ["hermes-vps-agent"]},
+      {"text": "Fable 5 is out — and leaves Claude subscription plans on June 22, moving to usage-based pricing.", "refs": ["fable-5-deadline"]},
+      {"text": "Orchestration craft is maturing: six named workflow patterns and a subagent design checklist replaced vague 'use agents' advice.", "refs": ["orchestration-craft"]}
+    ],
+    "act": [
+      {"text": "Steal one agent-OS layer this week: start with Nate's skill-gated subagents — smallest step, biggest payoff.", "refs": ["orchestration-craft"]},
+      {"text": "Try Fable 5 on your current plan before the June 22 cutoff.", "refs": ["fable-5-deadline"]},
+      {"text": "If you want an agent that works while your laptop sleeps, follow Eric's 15-minute Hermes VPS setup.", "refs": ["hermes-vps-agent"]},
+      {"text": "Borrow Matt Pocock's stateful-lesson pattern for anything you're learning right now.", "refs": ["ai-that-teaches-you"]}
+    ]
+  },
+  "clusters": [
+    {
+      "id": "agent-operating-systems",
+      "badge": "NOVEL",
+      "headline": "Three channels, one blueprint: the personal agent OS",
+      "why_it_matters": "You're already building one — agr-informed is this pattern; these videos show the next layers.",
+      "about": [
+        "Ben AI: 80% of the value is a personalized daily overview — start with an Obsidian overlay, not a web app.",
+        "Claude managed agents demoed: per-agent credential vaults, sessions, memory stores, nightly 'dream' consolidation.",
+        "Liam Ottley runs the identical stack (skills + Notion + Apify + Higgsfield) as a one-person agency."
+      ],
+      "helps": [
+        "A proven architecture for turning Claude from chat into a compounding system — for yourself or clients."
+      ],
+      "start": [
+        "Watch Ben's MVP segment (11:08) and sketch the 5 things you want to see each morning.",
+        "Open platform.claude.com and create one managed agent with a single skill."
+      ],
+      "sources": [
+        {"channel": "Ben AI", "title": "Stop Using Claude Without an Agentic OS", "video_id": "1x32W8zAtrg", "note": "MVP dashboard — start with Obsidian, not a web app", "timestamp": "11:08", "seconds": 668},
+        {"channel": "Ben AI", "title": "Claude Managed Agents Will Change How You Sell AI Forever", "video_id": "ojmQ3t2LfVo", "note": "Managed agents: sessions, memory stores, credential vaults", "timestamp": "16:09", "seconds": 969},
+        {"channel": "Liam Ottley", "title": "Start a 1-Person AI Creative Agency with Higgsfield + Claude", "video_id": "3BatQW63C8g", "note": "Same blueprint, sold as a one-person agency", "timestamp": "13:13", "seconds": 793}
+      ]
+    },
+    {
+      "id": "hermes-vps-agent",
+      "badge": "TOOLS",
+      "headline": "Hermes: the always-on agent that lives on a $10 VPS",
+      "why_it_matters": "An agent that keeps working while your laptop is closed — and it just crossed into the mainstream.",
+      "about": [
+        "One-click Docker deploy on a cheap VPS; you talk to it through Telegram.",
+        "Runs cron jobs and a kanban board that moves its own tickets to done."
+      ],
+      "helps": [
+        "Eric's standout demo: a daily research funnel filtering 400 GitHub repos down to the 5 worth attention — your briefing pattern, for any firehose."
+      ],
+      "start": [
+        "Follow Eric's VPS setup (10:06); Tim and Metics have beginner walkthroughs if you get stuck."
+      ],
+      "sources": [
+        {"channel": "Eric Tech", "title": "Hermes Agent: My Top 3 Use Cases + Full VPS Setup", "video_id": "vp2FhDyyOxE", "note": "Top 3 use cases + full Hostinger VPS setup", "timestamp": "10:06", "seconds": 606},
+        {"channel": "Tech With Tim", "title": "Hermes Agent - Full Course & Setup Guide - For COMPLETE Beginners", "video_id": "mTYxpIRK7xA", "note": "Complete beginner's full course"},
+        {"channel": "Metics Media", "title": "Hermes Agent Hostinger Tutorial: Install and Setup Hermes on a VPS", "video_id": "Z0YO9KyVhVg", "note": "Step-by-step VPS install walkthrough"}
+      ]
+    },
+    {
+      "id": "orchestration-craft",
+      "badge": "LEARNING",
+      "headline": "How the top 1% actually orchestrate their agents",
+      "why_it_matters": "The practical curriculum for the multi-agent patterns you use in Claude Code every day.",
+      "about": [
+        "Eric names six reusable workflow patterns: fan-out, classify-and-act, adversarial verify, generate-and-filter, tournament, loop-until-done.",
+        "Honest costs: one comment-analysis run burned 2M tokens in 11 minutes — he caps the thinking ceiling."
+      ],
+      "helps": [
+        "Nate's subagent checklist: precise YAML descriptions for self-triggering, read-only tools, turn limits, Haiku for cheap filtering."
+      ],
+      "start": [
+        "Pick ONE pattern from Eric's list (05:01) and apply it to a task you repeat weekly."
+      ],
+      "sources": [
+        {"channel": "Eric Tech", "title": "Claude UltraCode Works Better When You Do These 5 Things", "video_id": "hs9HSTghuhI", "note": "Six workflow patterns, with real token costs", "timestamp": "05:01", "seconds": 301},
+        {"channel": "Nate Herk | AI Automation", "title": "How to Build Claude Subagents Better Than 99% of People", "video_id": "e18sdZLwP7o", "note": "Subagent descriptions + progressive disclosure", "timestamp": "07:04", "seconds": 424}
+      ]
+    },
+    {
+      "id": "fable-5-deadline",
+      "badge": "NEWS",
+      "headline": "Fable 5 is here — and leaves subscriptions June 22",
+      "why_it_matters": "Under two weeks to evaluate Fable 5 on the plan you already pay for.",
+      "about": [
+        "Tiers clarified: Fable 5 is the general release; Mythos 5 is the cyber-hardened variant at ~2x Opus pricing.",
+        "Fable at low effort ≈ Opus 4.8 at max reasoning for quality per dollar."
+      ],
+      "helps": [
+        "Nate's contrarian take: agentic loops mostly burn tokens on general knowledge work — save them for true iterative refinement."
+      ],
+      "start": [
+        "Run one of your real daily tasks on Fable 5 this week and compare against your current model."
+      ],
+      "sources": [
+        {"channel": "Nate Herk | AI Automation", "title": "Claude Mythos is Finally Here.", "video_id": "dYrrEKXtttk", "note": "Fable vs Mythos tiers and the June 22 cutoff", "timestamp": "02:02", "seconds": 122}
+      ]
+    },
+    {
+      "id": "ai-that-teaches-you",
+      "badge": "LEARNING",
+      "headline": "Make the AI your tutor, not just your intern",
+      "why_it_matters": "Direct validation for your /teach feature — with two patterns to steal.",
+      "about": [
+        "Matt Pocock's stateful /teach skill: a 'mission' file on why you're learning, interactive HTML lessons, a learning record that adapts.",
+        "Jeff Su's rule: 'the right context will always beat the perfect prompt.'"
+      ],
+      "helps": [
+        "Turns any topic from your briefing into a structured course that remembers where you left off."
+      ],
+      "start": [
+        "Watch Pocock's zone-of-proximal-development demo (07:06), then try /teach on today's top story."
+      ],
+      "sources": [
+        {"channel": "Matt Pocock", "title": "Learn anything with the /teach skill", "video_id": "s5T5oQJcJ6U", "note": "Stateful teaching skill with adaptive lessons", "timestamp": "07:06", "seconds": 426},
+        {"channel": "Jeff Su", "title": "How I'd Learn AI From Scratch in 2026 (skip the useless 80%)", "video_id": "msFxQ7OYPj8", "note": "'Right context beats perfect prompts' — the OC framework", "timestamp": "05:03", "seconds": 303}
+      ]
+    }
+  ],
+  "radar": [
+    {"tag": "tool", "text": "Firecrawl beat Claude's native web fetch on 4 of 5 e-commerce sites — Ben AI now defaults to it (and to CLIs over MCPs for tokens).", "video_id": "je95KXv1QlA", "channel": "Ben AI"},
+    {"tag": "tool", "text": "Claude + Gmail triaging a whole inbox into a prioritized sheet with send-ready drafts — Dan Martell's daily driver.", "video_id": "cY_8shF4oTU", "channel": "Dan Martell"},
+    {"tag": "signal", "text": "Supercomputer shipped a product, brand kit, and video ads from one prompt — market-gap analysis before code generation.", "video_id": "-jMpQ2tTCF8", "channel": "Eric Tech"},
+    {"tag": "verify", "text": "'Cursor just crushed Claude Code' — no transcript available yet; watch the demo before believing the headline.", "video_id": "XOCVdPIhAHg", "channel": "Tech With Tim"}
+  ]
+}

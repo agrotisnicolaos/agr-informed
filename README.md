@@ -11,14 +11,21 @@ Claude subscription does the analysis.
 Inspired by Dave Killeen's intake system (as shared by Aakash Gupta): he follows
 60 channels and 120 newsletters and reads none of them — his system does.
 
-## Quickstart
+> 🚀 **New here? Non-technical?** Follow the
+> **[Complete Setup Guide](docs/GUIDE.md)** — every step explained, no prior
+> knowledge assumed (~20 minutes). Or
+> **[view an example briefing](https://htmlpreview.github.io/?https://github.com/agrotisnicolaos/agr-informed/blob/main/examples/example-briefing.html)**
+> first to see what you're getting.
+
+It's topic-agnostic: the same system works for AI, science, finance, medicine —
+your channel list and profile define the domain.
+
+## Quickstart (the short version)
 
 1. Install [Claude Code](https://claude.com/claude-code) (any paid Claude plan).
-2. Clone and open:
-   ```bash
-   git clone https://github.com/agrotisnicolaos/agr-informed.git
-   cd agr-informed && claude
-   ```
+2. Get the project: **Code → Download ZIP** on GitHub (or
+   `git clone https://github.com/agrotisnicolaos/agr-informed.git`), then open
+   the folder in Claude Code.
 3. Run `/agr-setup` — checks dependencies (installs `yt-dlp`), interviews you to build
    your profile, and confirms your channel list.
 4. Run `/briefing` — your first report opens in the browser.

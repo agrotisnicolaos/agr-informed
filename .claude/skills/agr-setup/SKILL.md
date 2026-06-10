@@ -51,4 +51,8 @@ Show the current `sources.txt` channel list. Ask if they want to add/remove any
 ## Step 4 — Finish
 
 Offer to run the first briefing now (`/briefing` — first run covers the last
-3 days). Mention `/schedule-briefing` for automation and `/teach` for learning.
+3 days). Mention `/agr-schedule` for automation and `/teach` for learning.
+Point them at `examples/example-briefing.html` to see what they'll get, and at
+`docs/GUIDE.md` ("Reading your brief") for the anatomy of every section. The
+guide also covers channel-selection strategy for any topic — link it whenever
+their questions suggest they haven't read it.
