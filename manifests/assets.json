@@ -1,0 +1,46 @@
+{
+  "$schema_note": "agr-launchpad asset catalog. The base is deliberately lean and universal. Domain-specific assets live in packs/ and are merged in via `make use-pack`.",
+  "repo": "agr-launchpad",
+  "base": {
+    "plugins": {
+      "declarative": [
+        "superpowers@claude-plugins-official",
+        "skill-creator@claude-plugins-official",
+        "frontend-design@claude-plugins-official",
+        "code-review@claude-plugins-official",
+        "context-mode@context-mode",
+        "claude-mem@thedotmack"
+      ],
+      "external_manual": [
+        { "id": "gsd", "why": "installed globally into ~/.claude, not a repo plugin", "doc": "docs/onboarding.html" }
+      ]
+    },
+    "mcpServers": [
+      { "id": "context7", "purpose": "live library/framework docs" },
+      { "id": "github", "purpose": "repos/issues/PRs", "token": "${GITHUB_PAT}" },
+      { "id": "jupyter", "purpose": "live notebook kernel", "start": "make jupyter" }
+    ],
+    "skills": [
+      { "id": "grill-me", "path": ".claude/skills/grill-me/SKILL.md", "domain": "workflow" },
+      { "id": "coding-standards", "path": ".claude/skills/coding-standards/SKILL.md", "domain": "foundation", "origin": "ECC" },
+      { "id": "error-handling", "path": ".claude/skills/error-handling/SKILL.md", "domain": "foundation", "origin": "ECC" },
+      { "id": "html", "path": ".claude/skills/html/SKILL.md", "domain": "viz", "origin": "first-party" },
+      { "id": "dashboard-builder", "path": ".claude/skills/dashboard-builder/SKILL.md", "domain": "viz", "origin": "first-party" },
+      { "id": "code-tour", "path": ".claude/skills/code-tour/SKILL.md", "domain": "foundation", "origin": "ECC" },
+      { "id": "skill-stocktake", "path": ".claude/skills/skill-stocktake/SKILL.md", "domain": "meta", "origin": "ECC" }
+    ],
+    "agents": [
+      { "id": "architect", "path": ".claude/agents/architect.md" },
+      { "id": "code-architect", "path": ".claude/agents/code-architect.md" },
+      { "id": "code-explorer", "path": ".claude/agents/code-explorer.md" }
+    ],
+    "tools": [
+      { "id": "vscode-markitdown", "kind": "vscode-extension", "id_ext": "BioInfo.vscode-markitdown", "source": "https://github.com/BioInfo/vscode-markitdown" }
+    ]
+  },
+  "packs": {
+    "mechanism": "packs/<name> merged via scripts/use-pack.sh (make use-pack/new-pack/unuse-pack)",
+    "populated": ["_template"],
+    "planned": ["ml", "ios", "journal", "web"]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$comment": "agr-launchpad — declarative plugin setup. When you open and TRUST this folder in Claude Code, it offers to add the marketplaces below and install the listed plugins (a few approval clicks). gsd is NOT here: it installs separately (see onboarding). code-review provides /code-review including the 'ultra' cloud review.",
+  "extraKnownMarketplaces": {
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
+    "agr-hub": {
+      "source": {
+        "source": "github",
+        "repo": "agrotisnicolaos/agr-hub"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "context-mode@context-mode": true,
+    "claude-mem@thedotmack": true
+  }
+}

@@ -1,0 +1,16 @@
+# secrets
+.env
+
+# jupyter kernel venv (created by `make jupyter`)
+.jupyter-venv/
+.ipynb_checkpoints/
+
+# claude-mem / context-mode local state (regenerated per machine)
+.claude-mem/
+
+# os / editor cruft
+.DS_Store
+*.swp
+
+# active-pack record is local to each clone, not shared
+manifests/active-packs.json

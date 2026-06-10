@@ -1,0 +1,33 @@
+{
+  "$comment": "agr-launchpad project MCP servers. After you trust the folder, Claude Code asks you to approve these once. Tokens come from a local .env file (copy .env.example -> .env) and are NEVER committed. context7 = live docs; github = your repos/issues/PRs; jupyter = live notebook kernel (run `make jupyter`).",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PAT}"
+      }
+    },
+    "jupyter": {
+      "command": "uvx",
+      "args": [
+        "jupyter-mcp-server@latest"
+      ],
+      "env": {
+        "JUPYTER_URL": "${JUPYTER_URL:-http://localhost:8888}",
+        "JUPYTER_TOKEN": "${JUPYTER_TOKEN:-agr-local-dev}",
+        "ALLOW_IMG_OUTPUT": "true"
+      }
+    }
+  }
+}

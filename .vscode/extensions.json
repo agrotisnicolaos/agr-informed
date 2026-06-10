@@ -1,0 +1,7 @@
+{
+  "//": "Extensions VS Code will recommend when this folder is opened. None are required.",
+  "recommendations": [
+    "BioInfo.vscode-markitdown",
+    "anthropic.claude-code"
+  ]
+}

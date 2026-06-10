@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>agr-launchpad — Getting Started (a friendly, complete guide)</title>
+<style>
+  :root {
+    --bg: #0e1116; --panel: #161b22; --panel2: #1c2230; --ink: #e6edf3;
+    --muted: #9aa7b4; --line: #2a313c; --brand: #7c9cff; --brand2: #59d9b3;
+    --warn: #ffcf6b; --code: #0b0e13; --pill: #232a36;
+    --term: #8fd6a0; --termbg: #111f15; --termln: #244a30;
+    --chat: #8fb3e6; --chatbg: #121f33; --chatln: #284268;
+    --radius: 14px; --maxw: 880px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace; }
+  code { background: var(--pill); padding: 2px 6px; border-radius: 6px; font-size: 0.88em; }
+  pre {
+    background: var(--code); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.55; margin: 10px 0;
+  }
+  pre code { background: none; padding: 0; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+  header.hero {
+    background: radial-gradient(1200px 400px at 20% -10%, rgba(124,156,255,.18), transparent 60%),
+                radial-gradient(900px 380px at 95% 0%, rgba(89,217,179,.14), transparent 55%);
+    border-bottom: 1px solid var(--line); padding: 56px 0 40px;
+  }
+  .badge {
+    display: inline-block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--brand2); border: 1px solid var(--line); background: var(--panel);
+    padding: 5px 11px; border-radius: 999px; margin-bottom: 18px;
+  }
+  h1 { font-size: 40px; line-height: 1.1; margin: 0 0 12px; letter-spacing: -.02em; }
+  h1 .dim { color: var(--muted); font-weight: 600; }
+  .lede { font-size: 18px; color: var(--muted); max-width: 680px; margin: 0; }
+
+  nav.toc {
+    position: sticky; top: 0; z-index: 5; background: rgba(14,17,22,.85);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding: 10px 0;
+  }
+  nav.toc .wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  nav.toc a { font-size: 13px; color: var(--muted); padding: 5px 10px; border-radius: 8px; }
+  nav.toc a:hover { background: var(--panel); color: var(--ink); text-decoration: none; }
+
+  section { padding: 38px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: 26px; margin: 0 0 6px; letter-spacing: -.01em; }
+  h2 .num { color: var(--brand); font-variant-numeric: tabular-nums; margin-right: 10px; }
+  h3 { font-size: 17px; margin: 26px 0 8px; }
+  p { margin: 10px 0; }
+  ul, ol { margin: 10px 0; padding-left: 22px; }
+  li { margin: 6px 0; }
+
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
+  .card h4 { margin: 0 0 6px; font-size: 15px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .card .tag { font-size: 11px; color: var(--brand2); text-transform: uppercase; letter-spacing: .08em; }
+
+  .steps { counter-reset: step; list-style: none; padding: 0; }
+  .steps > li { position: relative; padding: 4px 0 18px 46px; margin: 0; }
+  .steps > li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0; width: 30px; height: 30px;
+    background: var(--brand); color: #0b0e13; font-weight: 700; border-radius: 50%;
+    display: grid; place-items: center; font-size: 14px;
+  }
+  .steps > li:not(:last-child)::after {
+    content: ""; position: absolute; left: 14px; top: 32px; bottom: 0; width: 2px; background: var(--line);
+  }
+  .steps h4 { margin: 0 0 4px; font-size: 16px; }
+
+  .note, .warn, .tip {
+    border-radius: 10px; padding: 12px 16px; margin: 16px 0; font-size: 14.5px; border: 1px solid var(--line);
+  }
+  .note { background: var(--panel2); }
+  .tip { background: rgba(89,217,179,.08); border-color: rgba(89,217,179,.35); }
+  .warn { background: rgba(255,207,107,.08); border-color: rgba(255,207,107,.4); }
+  .note b, .warn b, .tip b { color: var(--ink); }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  td code { white-space: nowrap; }
+
+  .kbd { background: var(--pill); border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 6px; padding: 1px 7px; font-size: 12.5px; }
+
+  /* where-to-type tags */
+  .where { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px; letter-spacing: .02em; margin: 14px 0 4px; }
+  .where--term { background: var(--termbg); color: var(--term); border: 1px solid var(--termln); }
+  .where--chat { background: var(--chatbg); color: var(--chat); border: 1px solid var(--chatln); }
+
+  /* example prompt bubble */
+  .prompt { background: var(--chatbg); border: 1px solid var(--chatln); border-left: 3px solid var(--brand);
+    border-radius: 6px 12px 12px 12px; padding: 12px 16px; margin: 10px 0; }
+  .prompt__label { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--chat); margin-bottom: 6px; }
+  .prompt p { margin: 0; color: var(--ink); font-style: italic; }
+
+  .lead-q { color: var(--brand2); font-weight: 600; }
+
+  footer { padding: 36px 0 60px; color: var(--muted); font-size: 13.5px; }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 30px; } header.hero { padding: 40px 0 30px; } section { padding: 30px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">Getting started · for everyone</span>
+    <h1>agr-launchpad <span class="dim">— a friendly, complete guide</span></h1>
+    <p class="lede">No coding experience needed. This guide shows you exactly what to install, where to
+      type each thing, and what to say — so you can set up the launchpad correctly and start building
+      with Claude today. Read top to bottom; it takes about 15 minutes.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#what">What &amp; why</a>
+    <a href="#how">How to read this</a>
+    <a href="#need">What you need</a>
+    <a href="#get">Get the launchpad</a>
+    <a href="#setup">Set it up</a>
+    <a href="#inside">What's inside</a>
+    <a href="#first">Your first project</a>
+    <a href="#cheats">Handy things to say</a>
+    <a href="#custom">Make it yours</a>
+    <a href="#optional">Optional power-ups</a>
+    <a href="#faq">Troubleshooting &amp; FAQ</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="what">
+    <h2><span class="num">1</span>What this is, and why it's worth it</h2>
+    <p><b>Claude Code</b> is an AI assistant from Anthropic that helps you build things — websites,
+      small apps, scripts, charts, documents — by chatting with it in plain English. <b>agr-launchpad</b>
+      is a ready-made starting folder for Claude Code. Open it, and Claude instantly becomes more
+      capable, careful, and helpful.</p>
+    <p>Think of it like a well-stocked workshop. An empty room means you fetch every tool yourself.
+      The launchpad hands you the workshop already set up — the right tools, arranged so they work
+      together — so you can just start making things.</p>
+    <div class="grid">
+      <div class="card"><span class="tag">What you get</span>
+        <h4>A smarter assistant</h4><p>Claude plans before it builds, writes real tests, reviews its own
+        work, and remembers your project between sessions.</p></div>
+      <div class="card"><span class="tag">What you give</span>
+        <h4>A few clicks</h4><p>Clone a folder, click “approve” a few times. No coding, no configuration
+        files to edit by hand.</p></div>
+      <div class="card"><span class="tag">The promise</span>
+        <h4>Freedom + a safety net</h4><p>Build however you like. The launchpad quietly assists you the
+        whole way — and you can customize it as much as you want, later.</p></div>
+    </div>
+    <p class="note"><b>You do not need to be a programmer.</b> If you can install an app and click a few
+      buttons, you can do everything in this guide. We explain every step.</p>
+  </section>
+
+  <section id="how">
+    <h2><span class="num">2</span>How to read this guide — the 2 places you type</h2>
+    <p>This is the one idea that makes everything click. There are <b>two different places</b> you'll
+      type things, and it matters which is which. Throughout this guide, every instruction is tagged so
+      you always know where it goes:</p>
+
+    <span class="where where--term">🖥 Terminal</span>
+    <p style="margin-top:4px">The <b>Terminal</b> is a plain text window where you run setup commands
+      (like installing things). You type a command, press <span class="kbd">Enter</span>, and it runs.
+      You'll only need it a handful of times.</p>
+    <pre><code>an example command you'd paste into the Terminal</code></pre>
+
+    <span class="where where--chat">💬 Claude</span>
+    <p style="margin-top:4px">This is the <b>chat box inside Claude Code</b> — where you talk to the AI
+      in normal sentences. This is where you spend almost all your time once you're set up.</p>
+    <div class="prompt"><span class="prompt__label">You say to Claude</span>
+      <p>“Build me a simple webpage with my name and a short bio.”</p></div>
+
+    <p class="tip"><b>Rule of thumb:</b> 🖥 <b>Terminal</b> = setup commands (rare). 💬 <b>Claude</b> =
+      everything you actually want to make (all the time). When in doubt, look at the tag above the box.</p>
+  </section>
+
+  <section id="need">
+    <h2><span class="num">3</span>What you need (and exactly how to get it)</h2>
+    <p>Two free programs, installed once. Take them one at a time.</p>
+
+    <h3>3.1 — Claude Code</h3>
+    <ol class="steps">
+      <li><h4>Download it</h4>Go to <a href="https://claude.com/claude-code">claude.com/claude-code</a>
+        and install the app for your computer (Mac or Windows). It's also available as a VS Code extension.</li>
+      <li><h4>Sign in</h4>Open it and sign in with your Anthropic account (create one if you don't have it).</li>
+    </ol>
+
+    <h3>3.2 — Node.js</h3>
+    <p>Some of the launchpad's tools run on Node.js — a small free engine. You don't use it directly;
+      it just needs to be present.</p>
+    <ol class="steps">
+      <li><h4>Download the “LTS” version</h4>Go to <a href="https://nodejs.org">nodejs.org</a> and click
+        the big <b>LTS</b> button. Open the downloaded file and click through the installer (all defaults are fine).</li>
+      <li><h4>Check it worked</h4>Open your Terminal (next box shows how) and type:
+        <span class="where where--term">🖥 Terminal</span>
+        <pre><code>node -v</code></pre>
+        If you see a version number like <code>v22.x.x</code>, you're good.</li>
+    </ol>
+
+    <h3>How do I open the Terminal?</h3>
+    <table>
+      <tr><th>Mac</th><th>Windows</th></tr>
+      <tr>
+        <td>Press <span class="kbd">⌘ Space</span>, type <b>Terminal</b>, press <span class="kbd">Enter</span>.</td>
+        <td>Press the <span class="kbd">⊞ Windows</span> key, type <b>Terminal</b> (or <b>PowerShell</b>),
+          press <span class="kbd">Enter</span>.</td>
+      </tr>
+    </table>
+    <p class="tip"><b>Using the Terminal, in one sentence:</b> click into the window, type (or paste) the
+      command exactly, and press <span class="kbd">Enter</span>. To paste: <span class="kbd">⌘V</span>
+      on Mac, <span class="kbd">Ctrl+V</span> (or right-click) on Windows.</p>
+    <p class="note"><b>Optional extras</b> (only if you'll use them): <a href="https://astral.sh/uv">uv</a>
+      for live notebooks, and <a href="https://git-scm.com">git</a> if you want to clone instead of
+      download. Both are covered where they come up.</p>
+  </section>
+
+  <section id="get">
+    <h2><span class="num">4</span>Get the launchpad onto your computer</h2>
+    <p>Two ways. <b>Pick one.</b> If you're not sure, choose Option A.</p>
+
+    <h3>Option A — Download (easiest, no Terminal)</h3>
+    <ol class="steps">
+      <li><h4>Open the project page</h4>Go to
+        <a href="https://github.com/agrotisnicolaos/agr-launchpad">github.com/agrotisnicolaos/agr-launchpad</a>.</li>
+      <li><h4>Download it</h4>Click the green <span class="kbd">&lt;&gt; Code</span> button, then
+        <span class="kbd">Download ZIP</span>. Find the ZIP in your Downloads and double-click to unzip it.</li>
+      <li><h4>Move it somewhere you'll find it</h4>Drag the unzipped <code>agr-launchpad</code> folder to
+        your Desktop or Documents.</li>
+    </ol>
+
+    <h3>Option B — Clone (one Terminal command)</h3>
+    <span class="where where--term">🖥 Terminal</span>
+    <pre><code>git clone https://github.com/agrotisnicolaos/agr-launchpad.git</code></pre>
+    <p>This creates an <code>agr-launchpad</code> folder wherever your Terminal is currently pointed
+      (usually your home folder).</p>
+
+    <h3>Then: open the folder in Claude Code</h3>
+    <ol class="steps">
+      <li><h4>Open Claude Code (or VS Code)</h4></li>
+      <li><h4>Open the folder</h4>Use <b>File → Open Folder…</b> and choose the
+        <code>agr-launchpad</code> folder you just got.</li>
+    </ol>
+  </section>
+
+  <section id="setup">
+    <h2><span class="num">5</span>Set it up (about five clicks)</h2>
+    <p>When you open the folder, Claude Code does most of the work — you just approve.</p>
+    <ol class="steps">
+      <li><h4>Trust the folder</h4>A box asks “Do you trust the files in this folder?” → click
+        <span class="kbd">Yes, I trust</span>. This unlocks the pre-configured setup.</li>
+      <li><h4>Approve the plugins</h4>Claude offers to add two “marketplaces” and install six plugins.
+        Click <span class="kbd">Approve</span> on each. <i>(What these are: section 6.)</i></li>
+      <li><h4>Or install them with one command</h4>Prefer the Terminal, or didn't see the prompts? In the
+        launchpad folder, run:
+        <span class="where where--term">🖥 Terminal</span>
+        <pre><code>make install-plugins</code></pre></li>
+      <li><h4>Approve the live tools</h4>Claude asks about three “MCP servers” (context7, github, jupyter).
+        Click <span class="kbd">Approve</span>. <i>(GitHub needs a token — optional, see below.)</i></li>
+      <li><h4>Restart Claude Code</h4>Close and reopen it so everything loads. <b>Done.</b></li>
+    </ol>
+    <p class="tip"><b>Check it worked:</b> in the Claude chat, type <code>/plugin</code> — you should see
+      all six plugins listed and enabled.</p>
+
+    <h3>Optional: connect GitHub</h3>
+    <p>Only if you want Claude to work with your GitHub repositories. You give it a private “token”.</p>
+    <ol class="steps">
+      <li><h4>Make a copy of the settings file</h4>
+        <span class="where where--term">🖥 Terminal</span>
+        <pre><code>cp .env.example .env</code></pre></li>
+      <li><h4>Create a token</h4>Go to
+        <a href="https://github.com/settings/tokens">github.com/settings/tokens</a> →
+        <b>Generate new token</b> (a fine-grained token with read access to your repos is plenty). Copy it.</li>
+      <li><h4>Paste it in</h4>Open the new <code>.env</code> file and put your token after the equals sign:
+        <pre><code>GITHUB_PAT=github_pat_xxxxxxxxxxxx</code></pre>
+        Save, then restart Claude Code.</li>
+    </ol>
+    <p class="warn"><b>Your token stays private.</b> The <code>.env</code> file is never uploaded or
+      shared. Leave it blank to skip GitHub entirely — everything else still works.</p>
+  </section>
+
+  <section id="inside">
+    <h2><span class="num">6</span>What's inside — and why each piece helps</h2>
+    <p>You don't have to memorize these. This is your reference for “what is that thing Claude just did?”
+      Each one is made by a credible team; the launchpad's job is arranging them so they work together.</p>
+
+    <h3>Plugins — abilities added to Claude</h3>
+    <div class="grid">
+      <div class="card"><span class="tag">by Jesse Vincent</span><h4>superpowers</h4>
+        <p>Makes Claude work like a careful professional: brainstorm, plan, test, then build and double-check.
+        This is what keeps results solid instead of sloppy.</p></div>
+      <div class="card"><span class="tag">by Anthropic</span><h4>skill-creator</h4>
+        <p>Lets you teach Claude a new reusable “skill” when you keep doing the same task. It builds and
+        tests the skill for you.</p></div>
+      <div class="card"><span class="tag">by Anthropic</span><h4>frontend-design</h4>
+        <p>Makes anything visual (websites, pages) actually look designed — not generic.</p></div>
+      <div class="card"><span class="tag">by Anthropic</span><h4>code-review</h4>
+        <p>Checks work for mistakes before you rely on it. Type <code>/code-review</code>; for a deep
+        cloud check, <code>/code-review ultra</code>.</p></div>
+      <div class="card"><span class="tag">by Mert Köseoğlu</span><h4>context-mode</h4>
+        <p>Keeps Claude fast and focused on long tasks by tucking away bulky output behind the scenes.</p></div>
+      <div class="card"><span class="tag">by Alex Newman</span><h4>claude-mem</h4>
+        <p>Remembers your project across days, so you don't re-explain it every time you come back.</p></div>
+    </div>
+
+    <h3>Live tools (MCP servers) — connections to the real world</h3>
+    <div class="grid">
+      <div class="card"><span class="tag">by Upstash</span><h4>context7</h4>
+        <p>Fetches up-to-date documentation, so Claude uses today's information, not old memory.</p></div>
+      <div class="card"><span class="tag">by Anthropic</span><h4>github</h4>
+        <p>Connects your GitHub repositories, issues, and pull requests (needs the optional token).</p></div>
+      <div class="card"><span class="tag">by Datalayer</span><h4>jupyter</h4>
+        <p>Runs live notebooks — great for data and charts. Start it with <code>make jupyter</code>.</p></div>
+    </div>
+
+    <h3>Ready-made skills &amp; agents — already in the folder</h3>
+    <p>No installing needed. Skills are invoked with a slash, like <code>/grill-me</code>. Highlights:
+      <code>/grill-me</code> (stress-tests your plan with questions), <code>coding-standards</code>,
+      <code>html</code> (polished web pages), <code>dashboard-builder</code>, <code>code-tour</code>.
+      Helper “agents” quietly plan and explore your project when needed.</p>
+  </section>
+
+  <section id="first">
+    <h2><span class="num">7</span>Your first project — with example prompts</h2>
+    <p>Here's the magic part: you just describe what you want, in the 💬 Claude chat. Below are real
+      prompts you can copy. Claude will usually ask a couple of questions, make a short plan, then build.</p>
+
+    <h3>Make a simple website</h3>
+    <div class="prompt"><span class="prompt__label">You say to Claude</span>
+      <p>“Build me a clean, modern one-page website with my name (Alex Rivera), a short bio about me being
+      a photographer, and buttons linking to my Instagram and email. Then show it to me.”</p></div>
+
+    <h3>Organize or tidy files</h3>
+    <div class="prompt"><span class="prompt__label">You say to Claude</span>
+      <p>“I have a folder of photos with messy names. Help me rename them all to the date each photo was
+      taken, like 2026-06-09-01.jpg.”</p></div>
+
+    <h3>Turn data into a chart</h3>
+    <div class="prompt"><span class="prompt__label">You say to Claude</span>
+      <p>“I have a spreadsheet of my monthly expenses called budget.csv. Make me a simple chart showing
+      which categories I spend the most on.”</p></div>
+
+    <h3>Learn while you build</h3>
+    <div class="prompt"><span class="prompt__label">You say to Claude</span>
+      <p>“I'm brand new to coding. Build a tiny number-guessing game with me and explain each step in
+      plain English as we go.”</p></div>
+
+    <p class="tip"><b>Be specific, then relax.</b> The more detail you give (names, colors, what it's for),
+      the better the result. After that, let Claude drive — it'll plan, build, and check its work for you.</p>
+
+    <h3>A natural rhythm</h3>
+    <ol>
+      <li>Describe what you want. For anything non-trivial, Claude will <b>brainstorm</b> with you first.</li>
+      <li>Want to pressure-test your idea before building? Type <code>/grill-me</code> and answer its questions.</li>
+      <li>Claude makes a <b>plan</b>, then builds it (writing tests as it goes).</li>
+      <li>Before you rely on it, type <code>/code-review</code> for a once-over.</li>
+    </ol>
+  </section>
+
+  <section id="cheats">
+    <h2><span class="num">8</span>Handy things to say &amp; type</h2>
+    <p>A quick reference. Remember the tags: 💬 goes in the Claude chat, 🖥 goes in the Terminal.</p>
+
+    <h3>💬 Things to say to Claude</h3>
+    <table>
+      <tr><th>Goal</th><th>Try saying</th></tr>
+      <tr><td>Start something</td><td>“Build me a … that does …”</td></tr>
+      <tr><td>Understand code/a file</td><td>“Explain what this file does, like I'm new to this.”</td></tr>
+      <tr><td>Pressure-test a plan</td><td><code>/grill-me</code></td></tr>
+      <tr><td>Check the work</td><td><code>/code-review</code> &nbsp;(or <code>/code-review ultra</code>)</td></tr>
+      <tr><td>Make it look good</td><td>“Make this look clean, modern, and easy to read.”</td></tr>
+      <tr><td>Slow down &amp; learn</td><td>“Explain each step as you go, in plain English.”</td></tr>
+    </table>
+
+    <h3>🖥 Commands for the Terminal (run inside the launchpad folder)</h3>
+    <table>
+      <tr><th>Command</th><th>What it does</th></tr>
+      <tr><td><code>make install-plugins</code></td><td>Installs the six plugins in one go.</td></tr>
+      <tr><td><code>make setup</code></td><td>Prints a guided checklist of setup steps.</td></tr>
+      <tr><td><code>make jupyter</code></td><td>Starts live notebooks for data work.</td></tr>
+      <tr><td><code>make use-pack name=…</code></td><td>Adds a project pack (see section 9).</td></tr>
+    </table>
+  </section>
+
+  <section id="custom">
+    <h2><span class="num">9</span>Make it yours — and grow it later</h2>
+    <p>The launchpad is a <b>starting point, not a cage</b>. Use it exactly as-is, or shape it:</p>
+    <div class="grid">
+      <div class="card"><span class="tag">Add</span><h4>Your own skills</h4>
+        <p>Ask Claude to use <b>skill-creator</b> to turn a task you repeat into a reusable
+        <code>/command</code>.</p></div>
+      <div class="card"><span class="tag">Adjust</span><h4>The rulebook</h4>
+        <p>The <code>CLAUDE.md</code> file holds simple house rules. Edit it (or ask Claude to) to change
+        how it works with you.</p></div>
+      <div class="card"><span class="tag">Extend</span><h4>Packs</h4>
+        <p>Add a whole bundle of project-specific power when you need it — without bloating the base.</p></div>
+    </div>
+
+    <h3>Packs — capability for a specific kind of project</h3>
+    <p>When you start, say, a data project or an app, you install a <b>pack</b>: a ready bundle of skills,
+      agents, and tools for that domain. Two ways they reach you:</p>
+    <p><b>Packs bundled in the folder</b> — manage them in the Terminal:</p>
+    <span class="where where--term">🖥 Terminal</span>
+    <pre><code>make list-packs            # see what's available
+make use-pack name=ml      # add a pack
+make unuse-pack name=ml    # remove it</code></pre>
+    <p><b>Published packs</b> — install from a hub with one line in the 💬 Claude chat:</p>
+    <span class="where where--chat">💬 Claude</span>
+    <pre><code>/plugin install ml@agr-hub</code></pre>
+    <p>New packs are shared over time through <b>agr·hub</b>
+      (<a href="https://agrotisnicolaos.github.io/agr-hub/">agrotisnicolaos.github.io/agr-hub</a>) — and
+      can come from other hubs and marketplaces too. You'll be told when one is ready; a single
+      <code>/plugin install</code> adds it, skills and tools and all.</p>
+  </section>
+
+  <section id="optional">
+    <h2><span class="num">10</span>Optional power-ups</h2>
+    <h3>gsd — for bigger, multi-step plans</h3>
+    <p>A planning toolkit that breaks large goals into phases and verified steps. It installs separately
+      (it works across <i>all</i> your projects). Run once in the Terminal:</p>
+    <span class="where where--term">🖥 Terminal</span>
+    <pre><code>npx get-shit-done-cc@latest</code></pre>
+    <p>Follow its prompts, then restart Claude Code. Its <code>/gsd-*</code> commands then appear
+      everywhere. Optional — skip it unless you want milestone-scale planning.</p>
+
+    <h3>markitdown — turn PDFs &amp; docs into text Claude can read</h3>
+    <p>A VS Code extension that converts PDFs, Word/Excel/PowerPoint, and images into clean Markdown.
+      When you open the folder in VS Code, a box suggests it — click <span class="kbd">Install All</span>.
+      Or search <b>MarkItDown</b> (by <i>BioInfo</i>) in the Extensions panel.</p>
+  </section>
+
+  <section id="faq">
+    <h2><span class="num">11</span>Troubleshooting &amp; FAQ</h2>
+
+    <p class="lead-q">I didn't see the “install plugins” prompts.</p>
+    <p>Make sure you clicked <b>Yes, I trust</b> on the folder, then restart Claude Code. Or just run
+      <code>make install-plugins</code> in the 🖥 Terminal. Confirm with <code>/plugin</code>.</p>
+
+    <p class="lead-q">A command “isn't found” or gives an error in the Terminal.</p>
+    <p>Two common causes: (1) you're not <i>inside</i> the launchpad folder — see the next question; or
+      (2) Node.js isn't installed — re-check section 3 with <code>node -v</code>.</p>
+
+    <p class="lead-q">How do I make sure the Terminal is “in” the launchpad folder?</p>
+    <p>Type <code>cd </code> (with a space), then drag the <code>agr-launchpad</code> folder onto the
+      Terminal window and press <span class="kbd">Enter</span>. That moves you into it. Tip: opening the
+      Terminal <i>inside</i> Claude Code/VS Code usually starts you there already.</p>
+
+    <p class="lead-q">Do I have to use the Terminal at all?</p>
+    <p>Barely. You can set up with clicks (Download ZIP + approve prompts) and do everything else by
+      chatting with Claude. The Terminal is only for a few optional commands.</p>
+
+    <p class="lead-q">The GitHub features aren't working.</p>
+    <p>Check that you created the <code>.env</code> file and pasted your token into <code>GITHUB_PAT</code>,
+      then restarted. No token? That's fine — GitHub is optional.</p>
+
+    <p class="lead-q">Jupyter / notebooks won't connect.</p>
+    <p>Run <code>make jupyter</code> in the 🖥 Terminal and leave that window open — it powers the live
+      notebooks. (It needs <a href="https://astral.sh/uv">uv</a> installed.)</p>
+
+    <p class="lead-q">Is it safe to share this folder?</p>
+    <p>Yes — no secrets are included, and your <code>.env</code> token is never uploaded. Just don't share
+      your <code>.env</code> file itself.</p>
+
+    <p class="lead-q">Can I break something?</p>
+    <p>Not really. It's your own copy. If something gets messy, delete the folder and download a fresh
+      one. And Claude tracks its changes, so you can always ask it to undo.</p>
+
+    <p class="lead-q">What if I want more for a specific project?</p>
+    <p>Add a pack (section 9). The base stays simple; you bolt on exactly the extra power you need, when
+      you need it.</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>agr-launchpad · built on Claude Code. See also the hub:
+    <a href="https://agrotisnicolaos.github.io/agr-hub/">agr·hub</a>. Credit to the creators of every
+    plugin, tool, and MCP server — see <code>ATTRIBUTIONS.md</code> in the repo.</p>
+</footer>
+
+</body>
+</html>

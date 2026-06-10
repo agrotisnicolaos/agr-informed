@@ -1,0 +1,4 @@
+{
+  "$comment": "MCP servers this pack adds. `make use-pack` merges these into the repo .mcp.json (existing keys are never overwritten). Leave mcpServers empty if the pack needs no MCP. Use ${ENV_VAR} for any secrets and document them in .env.example.",
+  "mcpServers": {}
+}

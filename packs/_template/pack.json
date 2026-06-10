@@ -1,0 +1,13 @@
+{
+  "id": "_template",
+  "name": "Template Pack",
+  "version": "0.1.0",
+  "description": "Copy this folder to packs/<your-pack> (or run `make new-pack name=<your-pack>`) and edit. A pack bundles project-specific skills, agents, MCP servers, and a rulebook fragment that get merged into the active config by `make use-pack`.",
+  "skills": ["example-skill"],
+  "agents": ["example-agent"],
+  "mcpServers": [],
+  "requires": {
+    "plugins": [],
+    "notes": "List anything the user must install manually (e.g. a CLI, an SDK) so use-pack can warn them."
+  }
+}
