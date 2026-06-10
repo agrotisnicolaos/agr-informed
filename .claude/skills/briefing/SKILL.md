@@ -56,25 +56,45 @@ This is the core value. Work **across** sources, not per-video:
   If everyone is just reacting to the same announcement, say so — that IS the signal.
 - Leftover minor-but-interesting items → `quick_hits` (max 6). Drop pure filler;
   the 3% that matters is the product. It is fine to drop most videos.
-- **TL;DR**: exactly 2 paragraphs. Paragraph 1: today's strongest signal and why.
-  Paragraph 2: the pattern across sources + what to do about it. Write like a
-  sharp analyst briefing a friend, not a press release.
+- **The Brief** is two bullet lists, written for readers with very little
+  attention span — every bullet earns its place:
+  - `whats_new`: 3-5 bullets, each ONE crisp sentence naming a concrete
+    development, with `refs` pointing at the cluster id(s) it comes from.
+  - `act`: 2-4 bullets, each an imperative the reader can do this week
+    ("Watch X's 4-min setup, then…"), tailored to the profile.
 
-## Step 5 — Write data/briefing.json
+## Step 5 — Update the wiki (second brain)
+
+Read `wiki/SCHEMA.md` and follow it exactly: update/create topic pages for
+today's clusters, refresh `wiki/index.md`, append to `wiki/log.md`. Then read
+`state/runs.json` — if this will be run ≥ 7, derive `connections` (2-4 sharp
+ones, or none) per the schema's quality bar. Every ~10 runs, also run the
+schema's lint pass.
+
+## Step 6 — Write data/briefing.json
 
 ```json
 {
   "date": "YYYY-MM-DD",
   "title": "One evocative line naming today's theme",
   "stats": {"videos": 12, "channels": 8, "hours_covered": 4.5},
-  "tldr": ["paragraph 1", "paragraph 2"],
+  "brief": {
+    "whats_new": [
+      {"text": "One-sentence development", "refs": ["cluster-id"]}
+    ],
+    "act": [
+      {"text": "Imperative, doable this week", "refs": ["cluster-id"]}
+    ]
+  },
   "clusters": [
     {
       "id": "kebab-case-slug",
       "badge": "NOVEL",
       "headline": "Editorial headline, max ~10 words",
       "why_it_matters": "One sentence, tailored to the user's profile",
-      "summary": "2-4 sentences of substance: what was shown, what's actually new",
+      "about": ["1-2 bullets: what was shown/argued, concretely"],
+      "helps": ["1-2 bullets: what this lets the reader do"],
+      "start": ["1-2 numbered first steps, only if actionable"],
       "sources": [
         {
           "channel": "Ben AI",
@@ -89,16 +109,23 @@ This is the core value. Work **across** sources, not per-video:
   ],
   "quick_hits": [
     {"text": "One-line item", "video_id": "abc123", "channel": "Jeff Su"}
+  ],
+  "connections": [
+    {"kind": "builds_on|contradicts|reinforces|new_thread",
+     "topic": "wiki-topic-slug",
+     "text": "Cites the specific earlier finding and what changed today"}
   ]
 }
 ```
 
-Rules: `seconds` = timestamp converted to integer seconds (link target).
-First source in a cluster is the lead (its thumbnail is shown). First cluster
-is the feature story — make it the strongest one. `hours_covered` ≈ sum of video
-lengths (estimate 15 min/video if unknown), one decimal.
+Rules: every bullet ≤ ~18 words — scannable, not prose. `about`/`helps` required,
+`start` optional (omit when there's nothing to do). `seconds` = timestamp as
+integer seconds. First source in a cluster is the lead (thumbnail). First
+cluster is the feature story. `hours_covered` ≈ 15 min/video if unknown.
+Omit `connections` entirely before run 7 (render.py tracks runs and shows a
+warming-up bar automatically).
 
-## Step 6 — Render and deliver
+## Step 7 — Render and deliver
 
 ```bash
 python3 pipeline/render.py

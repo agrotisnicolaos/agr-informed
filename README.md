@@ -45,16 +45,29 @@ sources.txt ──▶ discover.py ──▶ transcripts.py ──▶ Claude Code
 - **Deterministic scripts** (`pipeline/`) fetch new videos via YouTube RSS (with a
   yt-dlp fallback for channels whose feeds are broken) and download transcripts.
 - **Claude does the thinking**: clusters stories *across* sources, badges them
-  (NOVEL / CONTRARIAN / TOOLS / NEWS / LEARNING), writes a 2-paragraph TL;DR, and
-  scores relevance against your `profile.md`.
+  (NOVEL / CONTRARIAN / TOOLS / NEWS / LEARNING), writes a scannable brief
+  (What's new / How to act on it), and scores relevance against your `profile.md`.
 - **The report** is a single self-contained HTML file: thumbnail-forward magazine
-  layout, timestamp deep-links into each video, ★ bookmarks (saved in your browser),
-  and a saved-stories filter. Share it by sending the file — it works anywhere.
+  layout, bulleted story cards (about / why it helps / get started), timestamp
+  deep-links into each video, ★ bookmarks (saved in your browser), and a
+  saved-stories filter. Share it by sending the file — it works anywhere.
+
+## The second brain (wiki)
+
+Every briefing is also filed into a private, Karpathy-style LLM wiki
+(`wiki/topics/*.md`): one living page per concept, tool, or trend, with a dated
+timeline, a current-state synthesis, and explicitly flagged contradictions.
+Claude maintains it; you just read it — or ask questions against it.
+
+After 7 runs, reports gain a **🧠 Second Brain — Connections** section showing
+how today's news *builds on*, *contradicts*, or *reinforces* earlier findings.
+Until then, reports show a warming-up progress bar. See `wiki/SCHEMA.md` for
+the conventions.
 
 ## Privacy
 
 Everything stays on your machine. `data/`, `reports/`, `state/`, and `profile.md`
-are gitignored. Sharing is opt-in: you send the HTML file, or you choose the
+and the wiki are gitignored. Sharing is opt-in: you send the HTML file, or you choose the
 cloud-routine scheduler knowing reports get committed to your repo.
 
 ## Make it yours

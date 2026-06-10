@@ -20,3 +20,5 @@ data/
 reports/
 state/
 profile.md
+wiki/*
+!wiki/SCHEMA.md

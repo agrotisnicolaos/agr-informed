@@ -13,21 +13,24 @@ at *their* level, grounded in *their* context.
 
 1. `profile.md` — their role and AI level set the pitch. No profile → assume
    smart beginner, zero jargon.
-2. **If they gave a concept name only:** find it in the latest report
+2. `wiki/topics/` — if a topic page exists for the concept (check `wiki/index.md`),
+   it holds the accumulated story: timeline, current state, contradictions.
+   Teach from it — it knows what the user has already encountered and when.
+3. **If they gave a concept name only:** find it in the latest report
    (`ls -t reports/*.html | head -1` — the briefing JSON is embedded in a
    `<script id="briefing-data">` tag) and in `data/transcripts/*.md`
    (grep for the term). The transcripts show how real practitioners used it —
    gold for concrete examples.
-3. **If they gave a report file:** read its embedded briefing JSON; if a concept
+4. **If they gave a report file:** read its embedded briefing JSON; if a concept
    wasn't specified, list the report's main concepts and ask which one.
-4. **If they gave a YouTube URL:** fetch the transcript on the fly:
+5. **If they gave a YouTube URL:** fetch the transcript on the fly:
    ```bash
    python3 -c "
    import sys; sys.path.insert(0,'pipeline')
    from transcripts import fetch_transcript
    print(fetch_transcript('VIDEO_ID') or 'no transcript')"
    ```
-5. Only search the web if local context is insufficient or the term needs
+6. Only search the web if local context is insufficient or the term needs
    up-to-date facts.
 
 ## Teach (the format)
